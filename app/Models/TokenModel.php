@@ -10,5 +10,5 @@ class TokenModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'counter'];
+    protected $allowedFields    = ['id', 'username', 'counter'];
 }

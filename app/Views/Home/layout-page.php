@@ -215,6 +215,7 @@
 
     <!-- section to main page -->
     <?= $this->renderSection('main-page') ?>
+    <?= $this->renderSection('activated-page') ?>
     <!-- endsection -->
 
     <!-- Footer -->

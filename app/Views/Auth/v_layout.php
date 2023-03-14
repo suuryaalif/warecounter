@@ -20,6 +20,7 @@
 
     <?= $this->renderSection('main-loginpage') ?>
     <?= $this->renderSection('main-registerpage') ?>
+    <?= $this->renderSection('main-activatedpage') ?>
 
     <!-- Footer -->
     <footer id="footer" class="text-center text-lg-start bg-white text-muted">
@@ -98,14 +99,14 @@
             }
         }
 
-        function showPass2Function() {
+        function showPassFunction2() {
             var input = document.getElementById("password2");
             if (input.type === "password") {
                 input.type = "text";
             } else {
                 input.type = "password";
             }
-        };
+        }
         //sweetalert funcution
         $(function() {
             <?php if (session()->has("success")) { ?>
@@ -120,7 +121,14 @@
                     title: 'Oops, Sorry',
                     text: '<?= session("Caution") ?>'
                 })
+            <?php } elseif (session()->has("error")) { ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops, Sorry',
+                    text: '<?= session("error") ?>'
+                })
             <?php } ?>
+
         });
     </script>
 </body>

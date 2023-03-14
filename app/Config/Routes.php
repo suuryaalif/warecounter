@@ -37,10 +37,18 @@ $routes->group('/', static function ($routes) {
     $routes->get('viewpdf/(:any)', 'Home::view_pdf/$1');
 });
 
+$routes->get('activatedaccount/(:any)/(:any)', 'Auth::activateAccount/$1/$2');
+
 $routes->group('authpage', static function ($routes) {
     $routes->get('login', 'Auth::loginPage');
     $routes->get('authpage/registration', 'Auth::registerPage');
     $routes->post('authpage/submit', 'Auth::saveRegister');
+    $routes->post('authpage/login', 'Auth::loginSubmit');
+});
+
+$routes->group('admin', static function ($routes) {
+    $routes->get('dashboard', 'Admin::dashboard');
+    $routes->get('admin/logout', 'Admin::logout');
 });
 /*
  * --------------------------------------------------------------------

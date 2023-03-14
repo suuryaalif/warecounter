@@ -78,7 +78,7 @@
                                 <div class="form-outline mb-4">
                                     <label for="form3Example1c" class="form-label">Repeat Password</label>
                                     <input type="password" id="password2" name="password2" class="form-control form-control-lg" />
-                                    <input type="checkbox" onclick="showPass2Function()" class="form-check-input me-2">Show Password
+                                    <input type="checkbox" onclick="showPassFunction2()" class="form-check-input me-2">Show Password
                                 </div>
 
                                 <div class="form-check d-flex justify-content-center mb-5">
