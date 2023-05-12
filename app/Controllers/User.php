@@ -4,11 +4,14 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class Admin extends BaseController
+class User extends BaseController
 {
     public function dashboard()
     {
-        return view('admin/v_dashboard');
+        $data = [
+            'title' => 'Dashboard|Page'
+        ];
+        return view('User/v_dashboard', $data);
     }
 
     public function logout()

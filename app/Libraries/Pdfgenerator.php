@@ -11,7 +11,7 @@ class Pdfgenerator
     {
 
         $options = new Options();
-        $options->set('isRemoteEnabled', true);
+        $options->set('isRemoteEnabled', TRUE);
         $options->set('chroot', realpath(''));
         $dompdf = new Dompdf($options);
 

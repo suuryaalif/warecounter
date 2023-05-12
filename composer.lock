@@ -248,16 +248,16 @@
         },
         {
             "name": "endroid/qr-code",
-            "version": "4.8.1",
+            "version": "4.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/endroid/qr-code.git",
-                "reference": "652157aee43d919be36cf2100a5a25b0882462f7"
+                "reference": "2436c2333a3931c95e2b96eb82f16f53143d6bba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/qr-code/zipball/652157aee43d919be36cf2100a5a25b0882462f7",
-                "reference": "652157aee43d919be36cf2100a5a25b0882462f7",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/2436c2333a3931c95e2b96eb82f16f53143d6bba",
+                "reference": "2436c2333a3931c95e2b96eb82f16f53143d6bba",
                 "shasum": ""
             },
             "require": {
@@ -311,7 +311,7 @@
             ],
             "support": {
                 "issues": "https://github.com/endroid/qr-code/issues",
-                "source": "https://github.com/endroid/qr-code/tree/4.8.1"
+                "source": "https://github.com/endroid/qr-code/tree/4.8.2"
             },
             "funding": [
                 {
@@ -319,7 +319,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-23T08:56:09+00:00"
+            "time": "2023-03-30T18:46:02+00:00"
         },
         {
             "name": "laminas/laminas-escaper",

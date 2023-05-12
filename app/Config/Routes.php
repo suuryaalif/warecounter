@@ -50,6 +50,11 @@ $routes->group('admin', static function ($routes) {
     $routes->get('dashboard', 'Admin::dashboard');
     $routes->get('admin/logout', 'Admin::logout');
 });
+
+$routes->group('user', static function ($routes) {
+    $routes->get('dashboard', 'User::dashboard');
+    $routes->get('user/logout', 'User::logout');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

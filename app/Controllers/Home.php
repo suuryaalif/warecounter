@@ -4,6 +4,15 @@ namespace App\Controllers;
 
 use App\Models\CounterModel;
 use App\Libraries\Pdfgenerator;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Writer\ValidationException;
 
 class Home extends BaseController
 {
@@ -94,6 +103,30 @@ class Home extends BaseController
         //if true!
         $counterCode = $this->request->getVar('counter_code');
 
+        // qrcode
+        $writer = new PngWriter();
+
+        // Create QR code
+        $qrCode = QrCode::create($counterCode . $tokenCounter)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(300)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        // Create generic logo
+        $logo = Logo::create('./assets/img/logo.png')
+            ->setResizeToWidth(50);
+
+        // Create generic label
+        $label = Label::create('Counter QR')
+            ->setTextColor(new Color(255, 0, 0));
+        // Save it to a file
+        $result = $writer->write($qrCode, $logo, $label);
+        $qrfilename = 'qr' . $counterCode . '.png';
+        $result->saveToFile('./assets/img/qr/' . $qrfilename);
 
         //inserting data
         $this->counterModel->insert([
@@ -105,7 +138,7 @@ class Home extends BaseController
             'driver_phone' => $this->request->getVar('driver_phone'),
             'pol_no' => $this->request->getVar('pol_no'),
             'status' => 'menunggu',
-            // 'qrcode' => $result
+            'qrcode' => $qrfilename
         ]);
 
         //setting session token for validation page

@@ -10,7 +10,7 @@ class CounterModel extends Model
 {
     protected $table            = 'counters';
     protected $primaryKey       = 'id_counter';
-    protected $allowedFields    = ['counter_code', 'record_code', 'do_no', 'shipper', 'driver_name', 'driver_phone', 'pol_no', 'status', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['counter_code', 'record_code', 'do_no', 'shipper', 'driver_name', 'driver_phone', 'pol_no', 'status', 'created_at', 'updated_at', 'qrcode'];
     protected $useTimestamps = true;
 
     public function getAll($counterCode)

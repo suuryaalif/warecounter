@@ -22,7 +22,7 @@
 
             font-size: 1.25em;
             width: 200px;
-            height: 60px;
+            height: 35px;
             text-align: left;
         }
     </style>
@@ -30,7 +30,10 @@
 
 <body>
     <section class="top-section" style="border-bottom: solid;border-radius: 5px;margin:5px,5px;padding: 5px,5px">
-        <div style="border-bottom: dashed; padding: 6px 3px;text-align:center" class="cop-tickets">
+        <div>
+            <img src="./assets/img/logo.png" width="50"><span>arecounter</span>
+        </div>
+        <div style="border-bottom: dashed; padding: 1px 3px;text-align:center" class="cop-tickets">
             <h2><i>Ticket Counter</i></h2>
             <small>counter nomor for loading on warehouse PT. ABC</small>
         </div>
@@ -38,6 +41,7 @@
     <section class="content">
         <table style="border: solid;border-radius: 5px;margin:20px,20px;padding: 20px;width: 100%">
             <?php foreach ($dataBooking as $b) : ?>
+                <img src="./assets/img/logo.png" width="50">
                 <tr>
                     <th>Counter Number</th>
                     <td>:</td>
@@ -47,26 +51,31 @@
                     <th>Counter Record</th>
                     <td>:</td>
                     <td><?= $b['record_code']; ?></td>
+
                 </tr>
                 <tr>
                     <th>Delivery Number</th>
                     <td>:</td>
                     <td><?= $b['do_no']; ?></td>
+
                 </tr>
                 <tr>
                     <th>Shipper Name</th>
                     <td>:</td>
                     <td><?= $b['shipper']; ?></td>
+
                 </tr>
                 <tr>
                     <th>Driver Name</th>
                     <td>:</td>
                     <td><?= $b['driver_name']; ?></td>
+
                 </tr>
                 <tr>
                     <th>Police No</th>
                     <td>:</td>
                     <td><?= $b['pol_no']; ?></td>
+
                 </tr>
             <?php endforeach; ?>
         </table>
