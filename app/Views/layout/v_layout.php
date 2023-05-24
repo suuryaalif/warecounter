@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('/assets') ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css">
 
 </head>
 
@@ -43,14 +44,47 @@
         </div>
         <!-- End of Content Wrapper -->
         <!-- Bootstrap core JavaScript-->
+        <!-- java script untuk element tambahan -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.js"></script>
         <script src="<?= base_url('/assets') ?>/vendor/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
         <script src="<?= base_url('/assets') ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
         <!-- Core plugin JavaScript-->
         <script src="<?= base_url('/assets') ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="<?= base_url('/assets') ?>/js/sb-admin-2.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#dataTable').DataTable();
+            });
+            //sweetalert funcution
+            $(function() {
+                <?php if (session()->has("success")) { ?>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Congrats!',
+                        text: '<?= session("success") ?>'
+                    })
+                <?php } elseif (session()->has("Caution")) { ?>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops, Sorry',
+                        text: '<?= session("Caution") ?>'
+                    })
+                <?php } elseif (session()->has("error")) { ?>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops, Sorry',
+                        text: '<?= session("error") ?>'
+                    })
+                <?php } ?>
+
+            });
+        </script>
 </body>
 
 </html>

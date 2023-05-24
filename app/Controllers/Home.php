@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 use App\Models\CounterModel;
 use App\Libraries\Pdfgenerator;
 use Endroid\QrCode\Color\Color;
@@ -16,11 +17,14 @@ use Endroid\QrCode\Writer\ValidationException;
 
 class Home extends BaseController
 {
+
     protected $counterModel;
 
     public function __construct()
     {
         $this->counterModel = new CounterModel();
+        helper('text');
+        $session = session();
     }
     public function index()
     {
@@ -28,12 +32,24 @@ class Home extends BaseController
         $allStatus = $this->counterModel->getAll($counterCode = null);
         $processStatus = $this->counterModel->nowCounter();
         $nextCount = $this->counterModel->nextCounter();
-        $nowCode = $processStatus['counter_code'];
-        $nowTime = $processStatus['updated_at'];
-        $nextCode = $nextCount['counter_code'];
-        $nextTime = $nextCount['updated_at'];
+        if ($processStatus != null) {
+            $nowCode = $processStatus['counter_code'];
+            $nowTime = $processStatus['updated_at'];
+        } else {
+            $nowCode = 0;
+            $nowTime = 0;
+        }
+
+        if ($nextCount != null) {
+            $nextCode = $nextCount['counter_code'];
+            $nextTime = $nextCount['updated_at'];
+        } else {
+            $nextCode = 0;
+            $nextTime = 0;
+        }
+
         $data = [
-            'title' => 'Warecounter|Web',
+            'title' => 'dashboard',
             'counterlist' => $allStatus,
             'nextCode' => $nextCode,
             'nextTime' => $nextTime,
@@ -105,9 +121,10 @@ class Home extends BaseController
 
         // qrcode
         $writer = new PngWriter();
-
+        // Qr Key
+        $qrkey = random_string('md5');
         // Create QR code
-        $qrCode = QrCode::create($counterCode . $tokenCounter)
+        $qrCode = QrCode::create($qrkey)
             ->setEncoding(new Encoding('UTF-8'))
             ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
             ->setSize(300)
@@ -125,7 +142,7 @@ class Home extends BaseController
             ->setTextColor(new Color(255, 0, 0));
         // Save it to a file
         $result = $writer->write($qrCode, $logo, $label);
-        $qrfilename = 'qr' . $counterCode . '.png';
+        $qrfilename = 'qr' . $qrkey . '.png';
         $result->saveToFile('./assets/img/qr/' . $qrfilename);
 
         //inserting data
@@ -138,7 +155,8 @@ class Home extends BaseController
             'driver_phone' => $this->request->getVar('driver_phone'),
             'pol_no' => $this->request->getVar('pol_no'),
             'status' => 'menunggu',
-            'qrcode' => $qrfilename
+            'qrcode' => $qrkey,
+            'qrfiles' => $qrfilename
         ]);
 
         //setting session token for validation page

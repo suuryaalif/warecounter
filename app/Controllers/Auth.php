@@ -44,6 +44,8 @@ class Auth extends BaseController
                             'token' => $tokenSession,
                             'is_login' => true
                         ]);
+
+                        session()->setFlashdata('success', 'your login as admin now');
                         return redirect()->to('admin/dashboard');
                     } else {
                         session()->setFlashdata('success', 'your login now');
@@ -55,6 +57,8 @@ class Auth extends BaseController
                             'token' => $tokenSession,
                             'is_login' => true
                         ]);
+
+                        session()->setFlashdata('success', 'your login as user now');
                         return redirect()->to('user/dashboard');
                     }
                 } else {

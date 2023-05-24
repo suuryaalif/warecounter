@@ -10,7 +10,7 @@ class CounterModel extends Model
 {
     protected $table            = 'counters';
     protected $primaryKey       = 'id_counter';
-    protected $allowedFields    = ['counter_code', 'record_code', 'do_no', 'shipper', 'driver_name', 'driver_phone', 'pol_no', 'status', 'created_at', 'updated_at', 'qrcode'];
+    protected $allowedFields    = ['counter_code', 'record_code', 'do_no', 'shipper', 'driver_name', 'driver_phone', 'pol_no', 'status', 'created_at', 'updated_at', 'qrcode', 'qrfiles'];
     protected $useTimestamps = true;
 
     public function getAll($counterCode)
@@ -21,7 +21,7 @@ class CounterModel extends Model
             return $query->getResultArray();
         } else {
             $builder = db_connect()->table('counters');
-            $query = $builder->select('*')->limit(10)->orderBy('counter_code', 'DESC');
+            $query = $builder->select('*')->orderBy('status ASC, counter_code ASC');
             return $query->get()->getResultArray();
         }
     }
@@ -36,7 +36,7 @@ class CounterModel extends Model
     public function nowCounter()
     {
         $builder = db_connect()->table('counters');
-        $query = $builder->select('*')->where('status', 'sedang bongkar')->orderBy('counter_code', 'updated_at', 'ASC')->limit(1);
+        $query = $builder->select('*')->where('status', 'bongkar')->orderBy('counter_code', 'updated_at', 'ASC')->limit(1);
         return $query->get()->getRowArray();
     }
 
@@ -61,5 +61,12 @@ class CounterModel extends Model
             'inputRecordcode' => $recordCounter
         ];
         return $dataCounter;
+    }
+
+    public function procNext($id)
+    {
+        $builder = db_connect()->table('counters');
+        $query = $builder->where('id_counter', $id)->set('status', 'bongkar');
+        return $query->update();
     }
 }

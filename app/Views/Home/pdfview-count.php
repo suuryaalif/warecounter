@@ -31,7 +31,7 @@
 <body>
     <section class="top-section" style="border-bottom: solid;border-radius: 5px;margin:5px,5px;padding: 5px,5px">
         <div>
-            <img src="./assets/img/logo.png" width="50"><span>arecounter</span>
+            <img src="./assets/img/logo.png" width="16"><span>arecounter</span>
         </div>
         <div style="border-bottom: dashed; padding: 1px 3px;text-align:center" class="cop-tickets">
             <h2><i>Ticket Counter</i></h2>
@@ -39,50 +39,27 @@
         </div>
     </section>
     <section class="content">
+        <div style="align-items: center; text-align:center;margin:3px 3px;">
+            <?php foreach ($dataBooking as $b) : ?>
+                <img src="./assets/img/qr/<?= $b['qrfiles'] ?>" width="220">
+            <?php endforeach; ?>
+        </div>
         <table style="border: solid;border-radius: 5px;margin:20px,20px;padding: 20px;width: 100%">
             <?php foreach ($dataBooking as $b) : ?>
-                <img src="./assets/img/logo.png" width="50">
                 <tr>
                     <th>Counter Number</th>
                     <td>:</td>
                     <td><?= $b['counter_code']; ?></td>
                 </tr>
                 <tr>
-                    <th>Counter Record</th>
-                    <td>:</td>
-                    <td><?= $b['record_code']; ?></td>
-
-                </tr>
-                <tr>
-                    <th>Delivery Number</th>
-                    <td>:</td>
-                    <td><?= $b['do_no']; ?></td>
-
-                </tr>
-                <tr>
-                    <th>Shipper Name</th>
-                    <td>:</td>
-                    <td><?= $b['shipper']; ?></td>
-
-                </tr>
-                <tr>
-                    <th>Driver Name</th>
-                    <td>:</td>
-                    <td><?= $b['driver_name']; ?></td>
-
-                </tr>
-                <tr>
-                    <th>Police No</th>
-                    <td>:</td>
-                    <td><?= $b['pol_no']; ?></td>
-
-                </tr>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
         </table>
     </section>
     <footer>
         <p>
-            save this tickets for your proof, and show to the staff officer/warehouse on Loading Gate Locket
+            save this tickets for your proof, and show to the staff officer/warehouse on Loading Gate Locket.
+            <br>
+            staff will scanning your barcode to process
         </p>
     </footer>
 </body>

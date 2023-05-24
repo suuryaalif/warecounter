@@ -55,6 +55,8 @@ $routes->group('user', static function ($routes) {
     $routes->get('dashboard', 'User::dashboard');
     $routes->get('user/logout', 'User::logout');
 });
+
+$routes->post('dashboard/qrproc', 'Admin::qrproc');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
